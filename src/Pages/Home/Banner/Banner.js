@@ -5,12 +5,14 @@ import banner3 from '../../../assets/images/banner/3.jpg'
 import banner4 from '../../../assets/images/banner/4.jpg'
 import banner5 from '../../../assets/images/banner/5.jpg'
 import banner6 from '../../../assets/images/banner/6.jpg'
+import './Banner.css'
 const Banner = () => {
     return (
         <div>
  <div className="carousel w-full">
   <div id="slide1" className="carousel-item relative w-full">
-    <img src={banner1} alt='' className="w-full" />
+    <div className='carousel-img'>
+        <img src={banner1} alt='' className="w-full" /> </div>
     <div className="absolute flex justify-end transform -translate-y-1/2 left-24 top-1/4  ">
     <h1 className='text-white font-bold text-5xl'>
         Affordable <br/>
