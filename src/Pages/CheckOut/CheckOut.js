@@ -20,8 +20,26 @@ const CheckOut = () => {
             customerName: name,
             price,
             phone,
-            message   
+            message,
+            email   
         }
+
+        fetch('http://localhost:5000/orders',{
+            method: 'POST',
+            headers: {
+                'content-type':'application/json'
+            },
+            body: JSON.stringify(order)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+            if(data.acknowledged){
+                alert('order place successfully')
+                form.reset()
+            }
+        })
+        .catch(error=>console.error(error))
     }
 
     return (
@@ -32,10 +50,11 @@ const CheckOut = () => {
                 <div className='grid sm:grid-cols-1 lg:grid-cols-2 gap-4'>
                     <input name='firstName' type="text" placeholder="First Name" className="input input-bordered input-warning w-full " />
                     <input name='lastName' type="text" placeholder="Last Name" className="input input-bordered input-warning w-full " />
-                    <input name='phone' type="text" placeholder="Your Phone" className="input input-bordered input-warning w-full " />
+                    <input name='phone' type="text" placeholder="Your Phone" className="input input-bordered input-warning w-full " required />
                     <input name='email' type="email" defaultValue={user?.email} placeholder="Your Email" className="input input-bordered input-warning w-full " readOnly />
                 </div>
-                <textarea name='message' className="textarea textarea-warning w-full" placeholder="Write your message here."></textarea>
+                <textarea name='message' className="textarea textarea-warning w-full" placeholder="Write your message here." required></textarea>
+                <button type='submit' className="btn btn-warning">Place Order</button>
             </form>
         </div>
     );
